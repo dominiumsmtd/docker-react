@@ -1,0 +1,14 @@
+FROM node:16-alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
+
+#Even though docker-compose will do the same thing, we still want this command be here,
+#to allow use use this without docker-compose in the future
+COPY . .
+
+CMD ["npm", "run", "start"]
