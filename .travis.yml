@@ -1,0 +1,14 @@
+sudo: required
+services:
+#docker is the service we need
+  - docker
+
+#the tag is not universal, so feel free to choose a short tag name
+before_install:
+  - docker build -t docker-react -f Dockerfile.dev .
+
+#commands for test to be executed
+#anything returned other than 0 will be considered FAILED
+script:
+  #as npm run test doesn't return anything w/o input, so we added "-- --coverage" so it ends by itself
+  - docker run docker-react npm run test -- --coverage
