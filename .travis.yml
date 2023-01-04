@@ -13,3 +13,17 @@ before_install:
 script:
   #as npm run test doesn't return anything w/o input, so we added "-- --coverage" so it ends by itself
   - docker run -e CI=true docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ca-central-1"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  #storage
+  bucket_name: "elasticbeanstalk-ca-central-1-085604639767"
+  #the same to the app name
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
