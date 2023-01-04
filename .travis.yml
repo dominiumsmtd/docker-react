@@ -1,3 +1,4 @@
+language: generic 
 sudo: required
 services:
 #docker is the service we need
@@ -11,4 +12,4 @@ before_install:
 #anything returned other than 0 will be considered FAILED
 script:
   #as npm run test doesn't return anything w/o input, so we added "-- --coverage" so it ends by itself
-  - docker run docker-react npm run test -- --coverage
+  - docker run -e CI=true docker-react npm run test
